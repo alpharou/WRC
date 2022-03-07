@@ -117,7 +117,7 @@ class Generador {
 		this.posicionN++;
 
 		//Editar punto de la reconstrucción de forma aditiva
-		this.reconstructorAsociado.reconstruccion[this.reconstructorAsociado.reconstruccion.length - 1] += this.puntoDiscreto * this.reconstructorAsociado.generatriz.evaluaN(this.posicionN);
+		this.reconstructorAsociado.reconstruccion[this.desfaseReconstruccion] += this.puntoDiscreto * this.reconstructorAsociado.generatriz.evaluaN(this.posicionN);
 
 		//DEBUG
 		//console.log(this.reconstructorAsociado.reconstruccion[this.desfaseReconstruccion]);
