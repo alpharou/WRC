@@ -16,15 +16,6 @@ class Reconstructor {
 
 		}
 
-		this.numGeneradores = numGeneradores;
-		this.generadores = [2*numGeneradores];	//Lista de generadores
-		this.indiceCilindrico = 0;	//Los generadores son reutilizados cuando se muestrean nuevos valores
-		for(let i = 0; i < 2*numGeneradores; i++) {
-
-			this.generadores[i] = new Generador(this);
-
-		}
-
 		this.entrada = 0.0;
 		this.puntosDiscretos = []; //Historial de puntos discretos que se enviará a los generadores.
 		this.densidad = densidad;
@@ -35,6 +26,16 @@ class Reconstructor {
 		
 		//Esta Sync pasará por 0 cuando se evalue en valores enteros de x
 		this.generatriz = new Sync(this.pasoDenso, Math.ceil(numGeneradores/2));
+
+		//Iniciar los generadores
+		this.numGeneradores = numGeneradores;
+		this.generadores = [2*numGeneradores];	//Lista de generadores
+		this.indiceCilindrico = 0;	//Los generadores son reutilizados cuando se muestrean nuevos valores
+		for(let i = 0; i < 2*numGeneradores; i++) {
+
+			this.generadores[i] = new Generador(this);
+
+		}
 
 	}
 
@@ -117,7 +118,7 @@ class Generador {
 		this.posicionN++;
 
 		//Editar punto de la reconstrucción de forma aditiva
-		this.reconstructorAsociado.reconstruccion[this.desfaseReconstruccion] += this.puntoDiscreto * this.reconstructorAsociado.generatriz.evaluaN(this.posicionN);
+		this.reconstructorAsociado.reconstruccion[this.reconstructorAsociado.reconstruccion.length - 1] += this.puntoDiscreto * this.reconstructorAsociado.generatriz.evaluaN(this.posicionN);
 
 		//DEBUG
 		//console.log(this.reconstructorAsociado.reconstruccion[this.desfaseReconstruccion]);

@@ -2,7 +2,7 @@ function preload() {}
 
 function setup() {
 	
-	reconstructor = new Reconstructor("sin(PI*x)/(PI*x)", 10, 60);
+	reconstructor = new Reconstructor("sin(PI*x)/(PI*x)", 7, 100);
 	interfaz = new Interfaz_Reconstructor(reconstructor, 0, 0, windowWidth, windowHeight);
   
 }
@@ -15,9 +15,10 @@ function draw() {
 
 	interfaz.draw();
 
-	if (reconstructor.reconstruccion.length > 1000) {
+	//Limitar tamaño de reconstruccion
+	if (reconstructor.reconstruccion.length > (reconstructor.numGeneradores * reconstructor.densidad)) {
 
-		reconstructor.reconstruccion.splice(0, reconstructor.reconstruccion.length - 1000);
+		reconstructor.reconstruccion.splice(0, reconstructor.reconstruccion.length - (reconstructor.numGeneradores * reconstructor.densidad));
 
 	}
 
